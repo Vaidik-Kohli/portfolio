@@ -1478,6 +1478,11 @@ button {
   display: block; /* show only when a link exists */
 }
 
+.nav-prev:not(:has(a)),
+.nav-next:not(:has(a)) {
+  display: none;
+}
+
 /* ---- Responsive for blog pages ---- */
 @media (max-width: 768px) {
     .blog-page-hero {
