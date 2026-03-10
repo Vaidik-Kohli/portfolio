@@ -187,7 +187,12 @@ document.addEventListener('DOMContentLoaded', () => {
             const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\n${message}`);
             const mailtoLink = `mailto:vaidikaru2323@gmail.com?subject=${subject}&body=${body}`;
 
-            window.location.href = mailtoLink;
+            const a = document.createElement('a');
+            a.href = mailtoLink;
+            a.target = '_blank';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
 
             // Visual feedback
             const btn = contactForm.querySelector('.btn-submit');
