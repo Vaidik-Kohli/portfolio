@@ -4,177 +4,297 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Blog — Vaidik</title>
-    <meta name="description" content="Thoughts, learnings, and stories by Vaidik Kohli — a student, developer, and designer from Amritsar, India.">
+    <meta name="description" content="Notes on building, designing, and learning — by Vaidik, a developer from Amritsar, India.">
+    <meta name="author" content="Vaidik">
 
-    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
+
+    <style>
+        /* Blog-page-specific styles — shared base comes from styles.css */
+
+        .blog-page-hero {
+            padding: clamp(4rem, 7vw, 6rem) 0 clamp(2.5rem, 4vw, 3.5rem);
+            border-bottom: 1px solid color-mix(in srgb, var(--line) 75%, transparent);
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            color: var(--muted);
+            font-size: 0.88rem;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            margin-bottom: 1.4rem;
+            transition: color 150ms ease;
+        }
+
+        .back-link:hover {
+            color: var(--accent);
+        }
+
+        .back-link svg {
+            flex-shrink: 0;
+        }
+
+        .blog-page-title {
+            font-size: clamp(2.8rem, 7vw, 5.5rem);
+            margin-bottom: 0.55rem;
+        }
+
+        .blog-page-subtitle {
+            color: var(--muted);
+            max-width: 52ch;
+            font-size: 1rem;
+        }
+
+        /* Blog listing */
+
+        .blog-listing {
+            padding: clamp(3.5rem, 6vw, 5.5rem) 0;
+        }
+
+        /* Featured post */
+
+        .blog-featured {
+            border: 1px solid var(--line);
+            border-left: 3px solid var(--accent);
+            border-radius: var(--radius);
+            background: color-mix(in srgb, var(--surface) 94%, #000 6%);
+            padding: clamp(1.2rem, 3vw, 2rem);
+            margin-bottom: 2.8rem;
+            transition: transform 200ms ease, box-shadow 200ms ease;
+        }
+
+        .blog-featured:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 14px 32px color-mix(in srgb, var(--accent) 12%, transparent);
+        }
+
+        .featured-label {
+            display: inline-block;
+            font-size: 0.78rem;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 0.8rem;
+        }
+
+        .blog-meta {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--muted);
+            font-size: 0.84rem;
+            margin-bottom: 0.6rem;
+        }
+
+        .blog-meta-sep {
+            opacity: 0.5;
+        }
+
+        .blog-featured-title {
+            font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+            margin-bottom: 0.75rem;
+            transition: color 150ms ease;
+        }
+
+        .blog-featured-title a {
+            color: var(--text);
+        }
+
+        .blog-featured:hover .blog-featured-title a {
+            color: var(--accent);
+        }
+
+        .blog-featured-excerpt {
+            color: #ddd3be;
+            max-width: 68ch;
+            margin-bottom: 1.1rem;
+        }
+
+        .blog-read-more {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            color: #ecdcc4;
+            border-bottom: 1px solid color-mix(in srgb, var(--accent) 55%, transparent);
+            font-size: 0.92rem;
+            transition: color 150ms ease, border-color 150ms ease;
+        }
+
+        .blog-read-more:hover {
+            color: var(--accent);
+            border-color: var(--accent);
+        }
+
+        /* All posts grid */
+
+        .all-posts-heading {
+            font-family: "Manrope", sans-serif;
+            font-size: 0.82rem;
+            font-weight: 700;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--muted);
+            margin-bottom: 1.2rem;
+        }
+
+        .posts-grid {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .post-card {
+            display: grid;
+            grid-template-columns: 160px minmax(0, 1fr);
+            gap: 1rem;
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            background: color-mix(in srgb, var(--surface) 94%, #000 6%);
+            padding: 1.1rem;
+            transition: transform 200ms ease, box-shadow 200ms ease, border-color 200ms ease;
+        }
+
+        .post-card:hover {
+            transform: translateY(-3px);
+            border-color: color-mix(in srgb, var(--accent) 35%, var(--line));
+            box-shadow: 0 10px 28px color-mix(in srgb, var(--accent) 10%, transparent);
+        }
+
+        .post-date {
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            font-size: 0.8rem;
+            font-weight: 700;
+            align-self: start;
+            padding-top: 0.2rem;
+        }
+
+        .post-card h3 {
+            font-size: clamp(1.3rem, 2vw, 1.75rem);
+            margin-bottom: 0.4rem;
+            transition: color 150ms ease;
+        }
+
+        .post-card:hover h3 {
+            color: var(--accent);
+        }
+
+        .post-card p {
+            color: #ddd0bc;
+            font-size: 0.95rem;
+            margin-bottom: 0.7rem;
+        }
+
+        @media (max-width: 680px) {
+            .post-card {
+                grid-template-columns: 1fr;
+                gap: 0.3rem;
+            }
+
+            .post-date {
+                font-size: 0.75rem;
+            }
+        }
+    </style>
 </head>
 <body>
 
-    <!-- NAVBAR -->
-    <nav class="navbar scrolled" id="navbar">
-        <div class="nav-container">
-            <a href="index.html" class="nav-logo">
-                <span class="logo-bracket">&lt;</span>Vaidik<span class="logo-bracket"> /&gt;</span>
-            </a>
-            <ul class="nav-menu" id="navMenu">
-                <li><a href="index.html#about" class="nav-link">About</a></li>
-                <li><a href="index.html#skills" class="nav-link">Skills</a></li>
-                <li><a href="index.html#projects" class="nav-link">Projects</a></li>
-                <li><a href="blog.html" class="nav-link active">Blog</a></li>
-                <li><a href="index.html#contact" class="nav-link">Contact</a></li>
-                <li>
-                    <a href="assets/resume.pdf" class="nav-resume-btn" target="_blank" rel="noopener noreferrer">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-                        Resume
-                    </a>
-                </li>
-            </ul>
-            <button class="hamburger" id="hamburger" aria-label="Toggle navigation menu">
-                <span class="bar"></span>
-                <span class="bar"></span>
-                <span class="bar"></span>
-            </button>
+    <header class="site-header">
+        <div class="container nav-wrap">
+            <a class="brand" href="index.html">Vaidik</a>
+            <nav aria-label="Primary">
+                <ul class="nav-links">
+                    <li><a href="index.html#about">About</a></li>
+                    <li><a href="index.html#projects">Projects</a></li>
+                    <li><a href="blog.html" class="active">Blog</a></li>
+                    <li><a href="index.html#contact">Contact</a></li>
+                    <li><a href="https://vaidik-kohli.github.io/assets/resume.pdf" target="_blank" rel="noopener noreferrer">Resume</a></li>
+                </ul>
+            </nav>
         </div>
-    </nav>
+    </header>
 
-    <!-- BLOG HERO -->
-    <section class="blog-page-hero">
-        <div class="container">
-            <a href="index.html" class="back-link fade-up">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
-                Back to Home
-            </a>
-            <h1 class="blog-page-title fade-up">Blog</h1>
-            <p class="blog-page-subtitle fade-up">Thoughts, learnings, and stories from my journey as a student developer.</p>
-        </div>
-    </section>
+    <main>
+        <section class="blog-page-hero">
+            <div class="container">
+                <a href="index.html" class="back-link reveal">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+                    Back to portfolio
+                </a>
+                <h1 class="blog-page-title reveal">Blog</h1>
+                <p class="blog-page-subtitle reveal">Notes from what I build and how I think through decisions.</p>
+            </div>
+        </section>
 
-    <!-- BLOG LISTING -->
-    <section class="blog-listing">
-        <div class="container">
+        <section class="blog-listing">
+            <div class="container">
 
-            <!-- Featured Post -->
-            <article class="blog-featured-card fade-up">
-                <div class="blog-featured-badge">Latest Post</div>
-                <div class="blog-featured-content">
+                <article class="blog-featured reveal">
+                    <span class="featured-label">Latest</span>
                     <div class="blog-meta">
                         <time datetime="2026-03-09">March 9, 2026</time>
-                        <span class="blog-meta-sep">&bull;</span>
+                        <span class="blog-meta-sep">·</span>
                         <span>5 min read</span>
                     </div>
                     <h2 class="blog-featured-title">
                         <a href="blog/my-journey-into-web-development.html">My Journey Into Web Development</a>
                     </h2>
                     <p class="blog-featured-excerpt">
-                        How I started learning to code, the resources I used, and what I've learned along the way
-                        as a 16-year-old self-taught developer. From my first HTML page to building full projects —
-                        here's the story of how it all began.
+                        How I moved from simple Python scripts to front-end work, what helped, what wasted time, and what I would do first if I had to restart from zero.
                     </p>
-                    <div class="blog-tags">
-                        <span class="blog-tag">Web Dev</span>
-                        <span class="blog-tag">Journey</span>
-                        <span class="blog-tag">Learning</span>
-                    </div>
-                    <a href="blog/my-journey-into-web-development.html" class="blog-read-more">
-                        Read Full Post
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                    <a class="blog-read-more" href="blog/my-journey-into-web-development.html">
+                        Read post
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
                     </a>
+                </article>
+
+                <p class="all-posts-heading reveal">All posts</p>
+
+                <div class="posts-grid">
+
+                    <article class="post-card reveal">
+                        <p class="post-date">Mar 9, 2026</p>
+                        <div>
+                            <h3><a href="blog/my-journey-into-web-development.html">My Journey Into Web Development</a></h3>
+                            <p>How I started learning to code, the resources I used, and what I've learned along the way as a 16-year-old self-taught developer.</p>
+                            <a class="blog-read-more" href="blog/my-journey-into-web-development.html">Read post →</a>
+                        </div>
+                    </article>
+
+                    <article class="post-card reveal">
+                        <p class="post-date">Mar 1, 2026</p>
+                        <div>
+                            <h3><a href="blog/design-tips-for-developer-portfolios.html">Design Tips for Developer Portfolios</a></h3>
+                            <p>The layout and writing choices that make a portfolio easier to trust, plus mistakes I made in my own first version.</p>
+                            <a class="blog-read-more" href="blog/design-tips-for-developer-portfolios.html">Read post →</a>
+                        </div>
+                    </article>
+
+                    <article class="post-card reveal">
+                        <p class="post-date">Feb 15, 2026</p>
+                        <div>
+                            <h3><a href="blog/preparing-for-bits-pilani.html">Preparing for BITS Pilani, My Strategy</a></h3>
+                            <p>How I split time between coding and exam prep, the study plan that works for me, and where I cut distractions.</p>
+                            <a class="blog-read-more" href="blog/preparing-for-bits-pilani.html">Read post →</a>
+                        </div>
+                    </article>
+
                 </div>
-            </article>
-
-            <!-- All Posts Grid -->
-            <h3 class="blog-section-heading fade-up">All Posts</h3>
-            <div class="blog-list-grid">
-
-                <article class="blog-list-card fade-up">
-                    <a href="blog/my-journey-into-web-development.html" class="blog-list-card-link">
-                        <div class="blog-list-card-top">
-                            <div class="blog-list-icon gradient-1">
-                                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-                            </div>
-                            <div class="blog-meta">
-                                <time datetime="2026-03-09">Mar 9, 2026</time>
-                                <span class="blog-meta-sep">&bull;</span>
-                                <span>5 min read</span>
-                            </div>
-                        </div>
-                        <h3 class="blog-list-title">My Journey Into Web Development</h3>
-                        <p class="blog-list-excerpt">
-                            How I started learning to code, the resources I used, and what I've learned
-                            along the way as a 16-year-old self-taught developer...
-                        </p>
-                        <div class="blog-tags">
-                            <span class="blog-tag">Web Dev</span>
-                            <span class="blog-tag">Journey</span>
-                        </div>
-                    </a>
-                </article>
-
-                <article class="blog-list-card fade-up">
-                    <a href="blog/design-tips-for-developer-portfolios.html" class="blog-list-card-link">
-                        <div class="blog-list-card-top">
-                            <div class="blog-list-icon gradient-2">
-                                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="M2 2l7.586 7.586"/><circle cx="11" cy="11" r="2"/></svg>
-                            </div>
-                            <div class="blog-meta">
-                                <time datetime="2026-03-01">Mar 1, 2026</time>
-                                <span class="blog-meta-sep">&bull;</span>
-                                <span>4 min read</span>
-                            </div>
-                        </div>
-                        <h3 class="blog-list-title">Design Tips for Developer Portfolios</h3>
-                        <p class="blog-list-excerpt">
-                            What I learned about making a portfolio that stands out — from color theory
-                            and typography to layout and user experience...
-                        </p>
-                        <div class="blog-tags">
-                            <span class="blog-tag">Design</span>
-                            <span class="blog-tag">Portfolio</span>
-                        </div>
-                    </a>
-                </article>
-
-                <article class="blog-list-card fade-up">
-                    <a href="blog/preparing-for-bits-pilani.html" class="blog-list-card-link">
-                        <div class="blog-list-card-top">
-                            <div class="blog-list-icon gradient-3">
-                                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
-                            </div>
-                            <div class="blog-meta">
-                                <time datetime="2026-02-15">Feb 15, 2026</time>
-                                <span class="blog-meta-sep">&bull;</span>
-                                <span>6 min read</span>
-                            </div>
-                        </div>
-                        <h3 class="blog-list-title">Preparing for BITS Pilani — My Strategy</h3>
-                        <p class="blog-list-excerpt">
-                            Balancing coding, freelancing, and exam preparation — here's how I'm
-                            planning my roadmap for BITSAT and beyond...
-                        </p>
-                        <div class="blog-tags">
-                            <span class="blog-tag">Education</span>
-                            <span class="blog-tag">BITSAT</span>
-                        </div>
-                    </a>
-                </article>
-
             </div>
-        </div>
-    </section>
+        </section>
+    </main>
 
-    <!-- FOOTER -->
-    <footer class="footer">
+    <footer class="site-footer">
         <div class="container">
-            <p class="footer-text">Designed & Built by <strong>Vaidik</strong> &copy; 2026</p>
-            <div class="footer-socials">
-                <a href="https://github.com/Vaidik-Kohli" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg></a>
-                <a href="https://instagram.com/vaidikkohli9" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
-                <a href="mailto:vaidikaru2323@gmail.com" aria-label="Email"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></a>
-            </div>
+            <p>Built by Vaidik</p>
+            <p><a href="https://vaidik-kohli.github.io/assets/resume.pdf" target="_blank" rel="noopener noreferrer">Resume</a></p>
         </div>
     </footer>
 

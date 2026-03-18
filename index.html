@@ -14,541 +14,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
-
-    <style>
-        :root {
-            --bg: #11100e;
-            --surface: #171512;
-            --text: #eee8dc;
-            --muted: #b9ad98;
-            --line: #2c271f;
-            --accent: #c39a68;
-            --max: 1120px;
-            --radius: 14px;
-            --shadow: 0 18px 40px rgba(0, 0, 0, 0.25);
-        }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            font-family: "Manrope", sans-serif;
-            background: radial-gradient(circle at 85% 8%, #1d1914 0%, var(--bg) 45%);
-            color: var(--text);
-            line-height: 1.7;
-            -webkit-font-smoothing: antialiased;
-            text-rendering: optimizeLegibility;
-        }
-
-        img {
-            max-width: 100%;
-            display: block;
-        }
-
-        a {
-            color: inherit;
-            text-decoration: none;
-        }
-
-        .container {
-            width: min(92%, var(--max));
-            margin-inline: auto;
-        }
-
-        .site-header {
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            backdrop-filter: blur(8px);
-            background: color-mix(in srgb, var(--bg) 86%, transparent);
-            border-bottom: 1px solid color-mix(in srgb, var(--line) 80%, transparent);
-        }
-
-        .nav-wrap {
-            min-height: 68px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 1rem;
-        }
-
-        .brand {
-            font-family: "Cormorant Garamond", serif;
-            font-size: clamp(1.5rem, 3vw, 1.9rem);
-            letter-spacing: 0.2px;
-            color: var(--text);
-            white-space: nowrap;
-        }
-
-        .nav-links {
-            display: flex;
-            list-style: none;
-            gap: clamp(0.45rem, 1.2vw, 1.2rem);
-            align-items: center;
-            flex-wrap: wrap;
-            justify-content: flex-end;
-        }
-
-        .nav-links a {
-            font-size: 0.92rem;
-            letter-spacing: 0.05em;
-            text-transform: uppercase;
-            color: var(--muted);
-            padding: 0.35rem 0.25rem;
-            border-bottom: 1px solid transparent;
-            transition: color 0.24s ease, border-color 0.24s ease;
-        }
-
-        .nav-links a:hover,
-        .nav-links a.active {
-            color: var(--accent);
-            border-color: color-mix(in srgb, var(--accent) 78%, transparent);
-        }
-
-        main {
-            overflow: clip;
-        }
-
-        section {
-            padding: clamp(4.5rem, 8vw, 7rem) 0;
-            border-bottom: 1px solid color-mix(in srgb, var(--line) 75%, transparent);
-        }
-
-        .fade {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.7s ease, transform 0.7s ease;
-        }
-
-        .fade.show {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .hero {
-            min-height: min(86vh, 760px);
-            display: grid;
-            align-items: center;
-            border-bottom: 1px solid color-mix(in srgb, var(--line) 70%, transparent);
-        }
-
-        .hero-inner {
-            display: grid;
-            grid-template-columns: 1.25fr 0.9fr;
-            gap: clamp(1.2rem, 4vw, 3.2rem);
-            align-items: end;
-        }
-
-        .kicker {
-            font-size: 0.87rem;
-            letter-spacing: 0.13em;
-            text-transform: uppercase;
-            color: var(--muted);
-            margin-bottom: 0.65rem;
-        }
-
-        h1,
-        h2,
-        h3 {
-            font-family: "Cormorant Garamond", serif;
-            line-height: 1.08;
-            font-weight: 600;
-            letter-spacing: 0.1px;
-        }
-
-        h1 {
-            font-size: clamp(3rem, 9vw, 6.4rem);
-            margin-bottom: 0.95rem;
-        }
-
-        .hero-line {
-            font-size: clamp(1.15rem, 2.5vw, 1.5rem);
-            max-width: 34ch;
-            color: #e5dccd;
-        }
-
-        .hero-meta {
-            margin-top: 1.1rem;
-            color: var(--accent);
-            font-size: 0.96rem;
-            letter-spacing: 0.04em;
-            text-transform: uppercase;
-        }
-
-        .hero-note {
-            background: color-mix(in srgb, var(--surface) 94%, #000 6%);
-            border: 1px solid color-mix(in srgb, var(--accent) 24%, var(--line));
-            border-radius: var(--radius);
-            box-shadow: var(--shadow);
-            padding: 1.3rem 1.2rem;
-            max-width: 380px;
-            justify-self: end;
-        }
-
-        .hero-note p {
-            font-size: 0.96rem;
-            color: #dbd2c4;
-        }
-
-        .hero-note p + p {
-            margin-top: 0.65rem;
-            color: var(--muted);
-        }
-
-        .section-head {
-            margin-bottom: clamp(1.4rem, 2.2vw, 2rem);
-        }
-
-        .section-head h2 {
-            font-size: clamp(2rem, 4vw, 3.15rem);
-        }
-
-        .section-head p {
-            margin-top: 0.4rem;
-            color: var(--muted);
-            max-width: 64ch;
-            font-size: 0.98rem;
-        }
-
-        .about-grid {
-            display: grid;
-            grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
-            gap: clamp(1rem, 3vw, 2.4rem);
-        }
-
-        .about-copy p {
-            max-width: 62ch;
-            color: #e7dfd2;
-            font-size: clamp(1rem, 1.35vw, 1.06rem);
-        }
-
-        .about-copy p + p {
-            margin-top: 1rem;
-        }
-
-        .about-facts {
-            border: 1px solid var(--line);
-            border-radius: var(--radius);
-            background: color-mix(in srgb, var(--surface) 92%, #000 8%);
-            padding: 1rem 1.1rem;
-            align-self: start;
-        }
-
-        .about-facts ul {
-            list-style: none;
-            display: grid;
-            gap: 0.62rem;
-        }
-
-        .about-facts li {
-            color: #dbcdb8;
-            font-size: 0.95rem;
-            border-bottom: 1px solid color-mix(in srgb, var(--line) 72%, transparent);
-            padding-bottom: 0.52rem;
-        }
-
-        .about-facts li:last-child {
-            border-bottom: none;
-            padding-bottom: 0;
-        }
-
-        .projects-wrap {
-            display: grid;
-            gap: 1.35rem;
-        }
-
-        .project {
-            border: 1px solid var(--line);
-            border-radius: var(--radius);
-            padding: clamp(1rem, 2.6vw, 1.65rem);
-            background: color-mix(in srgb, var(--surface) 94%, #000 6%);
-        }
-
-        .project-title-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: baseline;
-            gap: 1rem;
-            flex-wrap: wrap;
-            margin-bottom: 0.65rem;
-        }
-
-        .project h3 {
-            font-size: clamp(1.6rem, 2.7vw, 2.25rem);
-        }
-
-        .stack {
-            font-size: 0.84rem;
-            color: var(--accent);
-            letter-spacing: 0.09em;
-            text-transform: uppercase;
-            font-weight: 600;
-        }
-
-        .project p {
-            max-width: 70ch;
-            color: #ded3c2;
-        }
-
-        .project p + p {
-            margin-top: 0.75rem;
-        }
-
-        .project-links {
-            margin-top: 1rem;
-            display: flex;
-            gap: 0.95rem;
-            flex-wrap: wrap;
-        }
-
-        .link-btn {
-            border: 1px solid color-mix(in srgb, var(--accent) 32%, var(--line));
-            color: #e7dccb;
-            font-size: 0.9rem;
-            letter-spacing: 0.06em;
-            text-transform: uppercase;
-            padding: 0.55rem 0.75rem;
-            border-radius: 999px;
-            transition: background-color 0.24s ease, border-color 0.24s ease, color 0.24s ease;
-        }
-
-        .link-btn:hover {
-            background: color-mix(in srgb, var(--accent) 16%, transparent);
-            border-color: color-mix(in srgb, var(--accent) 62%, transparent);
-            color: #f6eddc;
-        }
-
-        .github-grid {
-            display: grid;
-            grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
-            gap: clamp(1rem, 3vw, 2rem);
-            align-items: start;
-        }
-
-        .github-card,
-        .graph-wrap {
-            border: 1px solid var(--line);
-            border-radius: var(--radius);
-            background: color-mix(in srgb, var(--surface) 94%, #000 6%);
-            padding: 1rem;
-        }
-
-        .github-card h3 {
-            font-size: 1.8rem;
-            margin-bottom: 0.45rem;
-        }
-
-        .github-card p {
-            color: #ddcfbc;
-            margin-bottom: 0.8rem;
-        }
-
-        .graph-wrap img {
-            width: 100%;
-            border-radius: 8px;
-            border: 1px solid color-mix(in srgb, var(--accent) 30%, var(--line));
-            background: #151311;
-            filter: sepia(0.26) saturate(0.72) hue-rotate(-8deg);
-        }
-
-        .blog-list {
-            display: grid;
-            gap: 1rem;
-        }
-
-        .blog-item {
-            display: grid;
-            grid-template-columns: 145px minmax(0, 1fr);
-            gap: 1rem;
-            border: 1px solid var(--line);
-            border-radius: var(--radius);
-            background: color-mix(in srgb, var(--surface) 94%, #000 6%);
-            padding: 1rem;
-        }
-
-        .blog-date {
-            color: var(--accent);
-            text-transform: uppercase;
-            letter-spacing: 0.08em;
-            font-size: 0.82rem;
-            font-weight: 700;
-            align-self: start;
-        }
-
-        .blog-item h3 {
-            font-size: clamp(1.35rem, 2.1vw, 1.8rem);
-            margin-bottom: 0.42rem;
-        }
-
-        .blog-item p {
-            color: #ddcfbc;
-            margin-bottom: 0.8rem;
-        }
-
-        .read-link {
-            color: #ecdcc4;
-            border-bottom: 1px solid color-mix(in srgb, var(--accent) 58%, transparent);
-            transition: color 0.22s ease;
-        }
-
-        .read-link:hover {
-            color: var(--accent);
-        }
-
-        .contact-grid {
-            display: grid;
-            grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-            gap: clamp(1.1rem, 3vw, 2rem);
-        }
-
-        .contact-copy p {
-            max-width: 48ch;
-            color: #dfd2bf;
-        }
-
-        .contact-links {
-            margin-top: 1rem;
-            display: grid;
-            gap: 0.5rem;
-        }
-
-        .contact-links a {
-            color: #ecdfca;
-            width: fit-content;
-            border-bottom: 1px solid color-mix(in srgb, var(--accent) 40%, transparent);
-        }
-
-        form {
-            border: 1px solid var(--line);
-            border-radius: var(--radius);
-            background: color-mix(in srgb, var(--surface) 95%, #000 5%);
-            padding: 1rem;
-        }
-
-        .field {
-            margin-bottom: 0.78rem;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 0.36rem;
-            color: #d8c9b4;
-            font-size: 0.9rem;
-        }
-
-        input,
-        textarea {
-            width: 100%;
-            border: 1px solid color-mix(in srgb, var(--line) 88%, transparent);
-            background: #141210;
-            color: var(--text);
-            border-radius: 10px;
-            padding: 0.72rem 0.8rem;
-            font: inherit;
-        }
-
-        textarea {
-            min-height: 130px;
-            resize: vertical;
-        }
-
-        input:focus,
-        textarea:focus {
-            outline: none;
-            border-color: color-mix(in srgb, var(--accent) 78%, transparent);
-            box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 18%, transparent);
-        }
-
-        .send {
-            width: 100%;
-            border: 1px solid color-mix(in srgb, var(--accent) 50%, transparent);
-            border-radius: 10px;
-            background: color-mix(in srgb, var(--accent) 16%, transparent);
-            color: #f4ead8;
-            padding: 0.75rem;
-            font-weight: 700;
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-            cursor: pointer;
-            transition: background-color 0.24s ease, border-color 0.24s ease;
-        }
-
-        .send:hover {
-            background: color-mix(in srgb, var(--accent) 24%, transparent);
-            border-color: color-mix(in srgb, var(--accent) 76%, transparent);
-        }
-
-        .site-footer {
-            padding: 1.6rem 0 2.4rem;
-            color: var(--muted);
-            font-size: 0.88rem;
-        }
-
-        .site-footer .container {
-            display: flex;
-            justify-content: space-between;
-            gap: 0.8rem;
-            flex-wrap: wrap;
-            align-items: center;
-        }
-
-        @media (max-width: 960px) {
-            .hero-inner,
-            .about-grid,
-            .github-grid,
-            .contact-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .hero-note {
-                justify-self: start;
-            }
-
-            .blog-item {
-                grid-template-columns: 1fr;
-                gap: 0.35rem;
-            }
-
-            .blog-date {
-                font-size: 0.76rem;
-            }
-        }
-
-        @media (max-width: 680px) {
-            .site-header {
-                position: static;
-            }
-
-            .nav-wrap {
-                min-height: auto;
-                flex-direction: column;
-                align-items: flex-start;
-                padding: 0.9rem 0;
-            }
-
-            .nav-links {
-                width: 100%;
-                justify-content: flex-start;
-            }
-
-            section {
-                padding: 3.5rem 0;
-            }
-
-            .hero {
-                min-height: auto;
-                padding-top: 2.1rem;
-                padding-bottom: 3.1rem;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <header class="site-header">
@@ -570,36 +36,54 @@
         <section class="hero">
             <div class="container hero-inner fade">
                 <div>
-                    <p class="kicker">Personal Portfolio</p>
+                    <!-- Profile photo + kicker row -->
+                    <div class="hero-identity">
+                        <img
+                            src="https://github.com/Vaidik-Kohli.png"
+                            alt="Vaidik"
+                            class="hero-avatar"
+                            width="52"
+                            height="52"
+                            loading="eager"
+                        >
+                        <p class="kicker">Personal Portfolio</p>
+                    </div>
                     <h1>Vaidik</h1>
                     <p class="hero-line">I like building things that feel alive, from game mechanics in Python to pages that read like a person made them.</p>
                     <p class="hero-meta">Amritsar, India</p>
                 </div>
                 <div class="about-highlights fade-up">
                     <div class="highlight-card">
-                        <span class="highlight-icon">🎓</span>
+                        <span class="highlight-icon" aria-hidden="true">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+                        </span>
                         <span class="highlight-label">Aspiring</span>
                         <span class="highlight-value">BITS Goa CSE '28</span>
                     </div>
                     <div class="highlight-card">
-                        <span class="highlight-icon">💼</span>
+                        <span class="highlight-icon" aria-hidden="true">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>
+                        </span>
                         <span class="highlight-label">Currently</span>
                         <span class="highlight-value">Freelancing</span>
                     </div>
                     <div class="highlight-card">
-                        <span class="highlight-icon">📍</span>
+                        <span class="highlight-icon" aria-hidden="true">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8z"/><circle cx="12" cy="10" r="3"/></svg>
+                        </span>
                         <span class="highlight-label">Based in</span>
                         <span class="highlight-value">Amritsar, India</span>
                     </div>
                     <div class="highlight-card">
-                        <span class="highlight-icon">🎂</span>
+                        <span class="highlight-icon" aria-hidden="true">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                        </span>
                         <span class="highlight-label">Age</span>
                         <span class="highlight-value">16 years old</span>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
         <section id="about">
             <div class="container about-grid fade">
@@ -749,50 +233,6 @@
         </div>
     </footer>
 
-    <script>
-        const navLinks = Array.from(document.querySelectorAll('.nav-links a[href^="#"]'));
-        const sections = navLinks
-            .map((link) => document.querySelector(link.getAttribute('href')))
-            .filter(Boolean);
-
-        const setActiveLink = () => {
-            const position = window.scrollY + window.innerHeight * 0.3;
-            let currentId = '';
-
-            sections.forEach((section) => {
-                if (position >= section.offsetTop) {
-                    currentId = section.id;
-                }
-            });
-
-            navLinks.forEach((link) => {
-                const target = link.getAttribute('href').replace('#', '');
-                link.classList.toggle('active', target === currentId);
-            });
-        };
-
-        window.addEventListener('scroll', setActiveLink, { passive: true });
-        window.addEventListener('load', setActiveLink);
-
-        const observer = new IntersectionObserver(
-            (entries) => {
-                entries.forEach((entry) => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('show');
-                        observer.unobserve(entry.target);
-                    }
-                });
-            },
-            { threshold: 0.14, rootMargin: '0px 0px -8% 0px' }
-        );
-
-        document.querySelectorAll('.fade').forEach((section) => observer.observe(section));
-
-        const form = document.querySelector('form');
-        form.addEventListener('submit', (event) => {
-            event.preventDefault();
-            form.reset();
-        });
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
