@@ -19,7 +19,10 @@
 <body>
     <header class="site-header">
         <div class="container nav-wrap">
-            <a class="brand" href="#top">Vaidik</a>
+            <div class="hero-identity">
+                <span class="hero-name">Vaidik</span>
+                <span class="hero-role">Developer · Designer · Amritsar</span>
+            </div>
             <nav aria-label="Primary">
                 <ul class="nav-links">
                     <li><a href="#about">About</a></li>
@@ -34,81 +37,60 @@
 
     <main id="top">
         <section class="hero">
+            <div class="hero-parallax-layer"></div>
             <div class="container hero-inner fade">
-                <div>
-                    <!-- Profile photo + kicker row -->
-                    <div class="hero-identity">
-                        <img
-                            src="https://github.com/Vaidik-Kohli.png"
-                            alt="Vaidik"
-                            class="hero-avatar"
-                            width="52"
-                            height="52"
-                            loading="eager"
-                        >
-                        <p class="kicker">Personal Portfolio</p>
+                <div class="hero-top-row">
+                    <div class="hero-identity-mobile">
+                        <span class="hero-name">Vaidik</span>
+                        <span class="hero-role">Developer · Designer · Amritsar</span>
                     </div>
-                    <h1>Vaidik</h1>
-                    <p class="hero-line">I like building things that feel alive, from game mechanics in Python to pages that read like a person made them.</p>
-                    <p class="hero-meta">Amritsar, India</p>
                 </div>
-                <div class="about-highlights fade-up">
-                    <div class="highlight-card">
-                        <span class="highlight-icon" aria-hidden="true">
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
-                        </span>
-                        <span class="highlight-label">Aspiring</span>
-                        <span class="highlight-value">BITS Goa CSE '28</span>
+                <div class="hero-display-wrap">
+                    <div class="hero-text">
+                        <h1 class="hero-display">Vaidik.</h1>
+                        <p class="hero-line">Building things that feel alive — from game mechanics in Python to pages that read like a person made them.</p>
                     </div>
-                    <div class="highlight-card">
-                        <span class="highlight-icon" aria-hidden="true">
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>
-                        </span>
-                        <span class="highlight-label">Currently</span>
-                        <span class="highlight-value">Freelancing</span>
-                    </div>
-                    <div class="highlight-card">
-                        <span class="highlight-icon" aria-hidden="true">
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8z"/><circle cx="12" cy="10" r="3"/></svg>
-                        </span>
-                        <span class="highlight-label">Based in</span>
-                        <span class="highlight-value">Amritsar, India</span>
-                    </div>
-                    <div class="highlight-card">
-                        <span class="highlight-icon" aria-hidden="true">
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-                        </span>
-                        <span class="highlight-label">Age</span>
-                        <span class="highlight-value">16 years old</span>
-                    </div>
+                    <img
+                        src="https://github.com/Vaidik-Kohli.png"
+                        alt="Vaidik"
+                        class="hero-avatar"
+                        loading="eager"
+                    >
+                </div>
+                <div class="hero-bottom-row">
+                    <span class="hero-location">AMRITSAR, INDIA</span>
+                    <span class="hero-scroll-indicator">
+                        <span class="scroll-label">scroll</span>
+                        <span class="scroll-line"></span>
+                    </span>
                 </div>
             </div>
         </section>
 
-        <section id="about">
-            <div class="container about-grid fade">
+        <section id="about" class="fade section-panel">
+            <div class="container about-grid">
+                <div class="section-head">
+                    <span class="section-number">01</span>
+                    <h2>About</h2>
+                </div>
                 <div class="about-copy">
-                    <div class="section-head">
-                        <h2>About</h2>
-                    </div>
                     <p>I started with Python because I wanted to make something that moved on screen, not just print lines in a console. That led me into Pygame, then into web work when I wanted a place to document what I was building.</p>
                     <p>Most of what I know comes from trial and error. I read docs, test ideas, and keep notes when a bad decision teaches me something useful. That habit helped me move faster than I expected.</p>
                     <p>Outside code, I spend time on cricket, photography, and games. Those three shape how I think about timing, composition, and feedback loops in projects.</p>
-                </div>
-                <aside class="about-facts">
-                    <ul>
-                        <li>Primary stack: Python, Pygame, HTML, CSS, JavaScript</li>
-                        <li>Tools: Git, Figma, Canva, Photoshop</li>
-                        <li>Focus: projects that feel complete, not half demos</li>
-                        <li>Location: Amritsar, Punjab, India</li>
+                    <ul class="about-facts-inline">
+                        <li>BITS Goa CSE '28</li>
+                        <li>Studying</li>
+                        <li>16</li>
+                        <li>Amritsar</li>
                     </ul>
-                </aside>
+                </div>
             </div>
         </section>
 
-        <section id="projects">
-            <div class="container fade">
+        <section id="projects" class="fade section-panel">
+            <div class="container">
                 <div class="section-head">
+                    <span class="section-number">02</span>
                     <h2>Projects</h2>
                     <p>Two builds that took real iteration, not one-night prototypes.</p>
                 </div>
@@ -140,9 +122,10 @@
             </div>
         </section>
 
-        <section id="github">
-            <div class="container fade">
+        <section id="github" class="fade section-panel">
+            <div class="container">
                 <div class="section-head">
+                    <span class="section-number">03</span>
                     <h2>GitHub Activity</h2>
                     <p>Public work and commit history.</p>
                 </div>
@@ -159,9 +142,10 @@
             </div>
         </section>
 
-        <section id="blog">
-            <div class="container fade">
+        <section id="blog" class="fade section-panel">
+            <div class="container">
                 <div class="section-head">
+                    <span class="section-number">04</span>
                     <h2>Blog</h2>
                     <p>Notes from what I build and how I think through decisions.</p>
                 </div>
@@ -194,12 +178,13 @@
             </div>
         </section>
 
-        <section id="contact">
-            <div class="container contact-grid fade">
+        <section id="contact" class="fade section-panel">
+            <div class="container contact-grid">
+                <div class="section-head">
+                    <span class="section-number">05</span>
+                    <h2>Contact</h2>
+                </div>
                 <div class="contact-copy">
-                    <div class="section-head">
-                        <h2>Contact</h2>
-                    </div>
                     <p>If you want to talk about a project, game idea, or web build, send me a message.</p>
                     <div class="contact-links">
                         <a href="mailto:vaidikaru2323@gmail.com">vaidikaru2323@gmail.com</a>
